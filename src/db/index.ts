@@ -2,15 +2,32 @@ import { env } from '@/lib/env'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
 
-const connectionString = env.DATABASE_URL ?? env.LOCAL_DATABASE_URL
+const isProd = env.NODE_ENV === 'production'
+const connectionString = isProd ? env.DATABASE_URL : env.LOCAL_DATABASE_URL
+
 if (!connectionString) {
-  throw new Error('DATABASE_URL or LOCAL_DATABASE_URL must be set')
+  throw new Error(
+    isProd
+      ? 'DATABASE_URL must be set in production'
+      : 'LOCAL_DATABASE_URL must be set in development/test',
+  )
 }
 
-export const pool = new Pool({
-  connectionString,
-  max: 10, // 同時接続上限
-  ssl: env.DATABASE_URL ? { rejectUnauthorized: false } : undefined, // NeonはSSL必須
-})
+const globalForDb = global as unknown as { __pool?: Pool; __db?: ReturnType<typeof drizzle> }
 
-export const db = drizzle(pool)
+export const pool =
+  globalForDb.__pool ??
+  new Pool({
+    connectionString,
+    max: 10,
+    ssl: isProd ? { rejectUnauthorized: false } : undefined,
+  })
+
+export const db = globalForDb.__db ?? drizzle(pool)
+
+if (!isProd) {
+  globalForDb.__pool = pool
+  globalForDb.__db = db
+}
+
+export const runtime = 'nodejs' as const

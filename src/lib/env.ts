@@ -2,8 +2,8 @@
 import { z } from 'zod'
 
 const EnvSchema = z.object({
-  DATABASE_URL: z.string().url().optional(),
-  LOCAL_DATABASE_URL: z.string().url().optional(),
+  DATABASE_URL: z.string(),
+  LOCAL_DATABASE_URL: z.string(),
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
 })
 
