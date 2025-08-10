@@ -11,7 +11,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
-    "e2e:ui": "playwright test --ui"
+    "e2e:ui": "playwright test --ui",
+    "e2e:headed": "playwright test --headed",
+    "e2e:report": "playwright show-report"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
@@ -39,6 +41,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/testing-library__jest-dom": "^6.0.0",
+    "@vitejs/plugin-react": "^5.0.0",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
@@ -52,6 +55,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"
   },
   "lint-staged": {
