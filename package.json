@@ -16,6 +16,8 @@
     "e2e:report": "playwright show-report"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.10.0",
+    "bcrypt": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.44.4",
