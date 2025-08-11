@@ -115,7 +115,7 @@ export const tasks = pgTable(
     userId: uuid('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
-    title: varchar('title', { length: 50 }).notNull(),
+    title: varchar('title', { length: 100 }).notNull(),
     isCompleted: boolean('is_completed').notNull().default(false),
     deletedAt: timestamp('deleted_at', { withTimezone: true }),
     createdAt: timestamp('created_at', { withTimezone: true })

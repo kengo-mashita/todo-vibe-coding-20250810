@@ -1,0 +1,1 @@
+ALTER TABLE "task" ALTER COLUMN "title" SET DATA TYPE varchar(100);
