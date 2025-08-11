@@ -3,16 +3,7 @@ import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
 
 const isProd = env.NODE_ENV === 'production'
-const connectionString = isProd ? env.DATABASE_URL : env.LOCAL_DATABASE_URL
-
-if (!connectionString) {
-  throw new Error(
-    isProd
-      ? 'DATABASE_URL must be set in production'
-      : 'LOCAL_DATABASE_URL must be set in development/test',
-  )
-}
-
+const connectionString = env.DATABASE_URL
 const globalForDb = global as unknown as { __pool?: Pool; __db?: ReturnType<typeof drizzle> }
 
 export const pool =

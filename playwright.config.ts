@@ -13,7 +13,6 @@ export default defineConfig({
       NODE_ENV: 'test',
       SKIP_DB_INIT: '1',
       DATABASE_URL: 'postgresql://dummy/dummy',
-      LOCAL_DATABASE_URL: '',
     },
   },
 })
